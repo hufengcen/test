@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="items">
+<head>
+<meta charset="utf-8">
+<title>items</title>
+<script src="angular.min.js"></script>
+<link rel="stylesheet" type="text/css" href="demo.css">
+</head>
+<body ng-controller="myCtrl">
+
+<div class="wrap">
+	<h1>marvelous!</h1>
+	<h2>lorem lpsum is simply dummy text of the priting</br>and</h2>
+	<p>ADD AN ITEM</p>
+	<div class="action">
+ 		<input ng-model="add" type="text" />
+		<span class="top"></span>
+		<span class="bottom"></span>
+		<span class="left"></span>
+		<span class="right"></span>
+		<select ng-model="selected" ng-options="x for x in names"></select>
+		<button ng-click="addfun(selected);">ADD ITEM</button>
+		<input ng-model="search" type="text" class="cho"/>
+	</div>
+	<div class="cont">
+	<ul class="ul-1">
+		<li ng-repeat="item in adds |filter:search track by $index">
+			{{item}}
+		<div ng-click="adds.splice($index,1)"><div class="x-bottom"></div><div class="x-left"></div></div>
+		</li>
+	</ul>
+	<ul class="ul-2">
+		<li ng-repeat="item in addsec |filter:search track by $index">
+			{{item}}
+		<div ng-click="addsec.splice($index,2)"><div class="x-bottom"></div><div class="x-left"></div>
+		</li>
+	</ul>
+	</div>
+</div>
+
+</body>
+<script>
+	angular.module('items',[])
+	.controller('myCtrl', function($scope,$filter) {
+   		 $scope.add = "ENTER ITEM";
+		 $scope.selected = "";
+		 $scope.search = "";
+		 $scope.adds = [];
+		 $scope.addsec = [];
+		 $scope.names = [ "COLUMN1", "COLUMN2"];
+		 $scope.addfun = function(selected){
+			selected=='COLUMN2'?$scope.addsec.push($scope.add):$scope.adds.push($scope.add);
+		 };	
+	});
+</script>
+</html>
